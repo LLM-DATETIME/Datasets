@@ -144,7 +144,7 @@
           "@type": "cr:Field",
           "@id": "datetime_nct_1_250/prep_days",
           "name": "prep_days",
-          "description": "The deadline, rendered in the same natural-language surface form as start_date.",
+          "description": "Number of days required for preparation.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
@@ -159,7 +159,7 @@
           "@type": "cr:Field",
           "@id": "datetime_nct_1_250/event_date",
           "name": "event_date",
-          "description": "The deadline, in ISO-8601 form.",
+          "description": "The deadline, rendered in the same natural-language surface form as start_date.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
