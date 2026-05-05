@@ -127,16 +127,46 @@
       "field": [
         {
           "@type": "cr:Field",
-          "@id": "datetime_nct_1_250/input",
-          "name": "input",
-          "description": "A datetime in natural form, e.g 11th.february.5951 ,1:12:31.446879 +0100",
+          "@id": "datetime_nct_1_250/start_date",
+          "name": "start_date",
+          "description": "The date preparation begins, in ISO-8601 form.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
               "@id": "datetime_nct_1_250_jsonl"
             },
             "extract": {
-              "column": "input"
+              "column": "start_date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "datetime_nct_1_250/prep_days",
+          "name": "prep_days",
+          "description": "Number of days required for preparation.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "datetime_nct_1_250_jsonl"
+            },
+            "extract": {
+              "column": "prep_days"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "datetime_nct_1_250/event_date",
+          "name": "event_date",
+          "description": "The deadline, in ISO-8601 form.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "datetime_nct_1_250_jsonl"
+            },
+            "extract": {
+              "column": "event_date"
             }
           }
         },
@@ -144,7 +174,7 @@
           "@type": "cr:Field",
           "@id": "datetime_nct_1_250/target",
           "name": "target",
-          "description": "The datetime in ISO-8601 format, without timezone and without microseconds",
+          "description": "A boolean answer ('yes' or 'no') indicating whether the event can be prepared within the 250-day window",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
