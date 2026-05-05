@@ -129,14 +129,29 @@
           "@type": "cr:Field",
           "@id": "datetime_a3_iso8601_add_day_250_x/input",
           "name": "input",
-          "description": "A datetime in natural form, e.g 11th.february.5951 ,1:12:31.446879 +0100",
+          "description": "An ISO-8601 datetime to which num_days days will be added.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
               "@id": "datetime_a3_iso8601_add_day_250_x_jsonl"
             },
             "extract": {
-              "column": "input"
+              "column": "input_sequence"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "datetime_a3_iso8601_add_day_250_x/num_days",
+          "name": "num_days",
+          "description": "Number of days to add to the input datetime.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "datetime_a3_iso8601_add_day_250_x_jsonl"
+            },
+            "extract": {
+              "column": "num_days"
             }
           }
         },
@@ -144,7 +159,7 @@
           "@type": "cr:Field",
           "@id": "datetime_a3_iso8601_add_day_250_x/target",
           "name": "target",
-          "description": "The datetime in ISO-8601 format, without timezone and without microseconds",
+          "description": "The datetime obtained by adding num_days days to input_sequence, in ISO-8601 form without timezone or microseconds.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
