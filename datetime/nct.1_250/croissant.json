@@ -111,7 +111,7 @@
       "@type": "cr:FileSet",
       "@id": "datetime_nct_1_250_jsonl",
       "name": "PRIMETIME/Event-Planning",
-      "description": "Assess if a task can be prepared within a 250 day window, by computing the difference between two datetimes presented in a natural representation",
+      "description": "Given a start date, a preparation duration in days, and an event date, decide whether the event can be prepared in time. Datetimes are rendered in varied natural-language surface forms.",
       "containedIn": {
         "@id": "github-repository"
       },
@@ -129,7 +129,7 @@
           "@type": "cr:Field",
           "@id": "datetime_nct_1_250/start_date",
           "name": "start_date",
-          "description": "The date preparation begins, in ISO-8601 form.",
+          "description": "The date preparation begins, rendered in one of several natural-language surface forms. Format varies across observations to test model robustness.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
@@ -144,7 +144,7 @@
           "@type": "cr:Field",
           "@id": "datetime_nct_1_250/prep_days",
           "name": "prep_days",
-          "description": "Number of days required for preparation.",
+          "description": "The deadline, rendered in the same natural-language surface form as start_date.",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
