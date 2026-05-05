@@ -109,31 +109,31 @@
     },
     {
       "@type": "cr:FileSet",
-      "@id": "datetime_a3_jsonl",
-      "name": "PRIMETIME/Translate",
-      "description": "Translate the full datetime to ISO-8601 representation without timezone and without microseconds",
+      "@id": "datetime_a3_iso8601_add_day_250_x_jsonl",
+      "name": "PRIMETIME/Add-250",
+      "description": "Add 250 days to a datetime presented in ISO-8601 representation and produce a new ISO-8601 datetime without timezone and without microseconds",
       "containedIn": {
         "@id": "github-repository"
       },
       "encodingFormat": "application/jsonlines",
-      "includes": "datetime/a.3/benchmark.jsonl"
+      "includes": "datetime/a3.iso8601.add.day.250.x/benchmark.jsonl"
     }
   ],
   "recordSet": [
     {
       "@type": "cr:RecordSet",
-      "@id": "datetime_a3",
-      "name": "PRIMETIME/Translate",
+      "@id": "datetime_a3_iso8601_add_day_250_x",
+      "name": "PRIMETIME/Add-250",
       "field": [
         {
           "@type": "cr:Field",
-          "@id": "datetime_a3/input",
+          "@id": "datetime_a3_iso8601_add_day_250_x/input",
           "name": "input",
           "description": "A datetime in natural form, e.g 11th.february.5951 ,1:12:31.446879 +0100",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
-              "@id": "datetime_a3_jsonl"
+              "@id": "datetime_a3_iso8601_add_day_250_x_jsonl"
             },
             "extract": {
               "column": "input"
@@ -142,13 +142,13 @@
         },
         {
           "@type": "cr:Field",
-          "@id": "datetime_a3/target",
+          "@id": "datetime_a3_iso8601_add_day_250_x/target",
           "name": "target",
           "description": "The datetime in ISO-8601 format, without timezone and without microseconds",
           "dataType": "sc:Text",
           "source": {
             "fileSet": {
-              "@id": "datetime_a3_jsonl"
+              "@id": "datetime_a3_iso8601_add_day_250_x_jsonl"
             },
             "extract": {
               "column": "target"
