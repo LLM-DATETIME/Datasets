@@ -1,0 +1,162 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "The PRIMETIME benchmark.",
+  "description": "The PRIMETIME benchmark introduces Translate, Compute and Event Planning tasks that aim to measure an LLM's ability on primitive datetime operations.",
+  "conformsTo": [
+    "http://mlcommons.org/croissant/1.0",
+    "http://mlcommons.org/croissant/RAI/1.0"
+  ],
+  "citeAs": "@misc{primetime2026, author       = {Anonymous}, title        = {{PRIMETIME}: A Benchmark for Temporal Translation and Reasoning in Large Language Models}, year         = {2026}, note         = {Under double-blind review at NeurIPS 2026 Datasets and Benchmarks Track} }",
+  "datePublished": "2026-05-04",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "rai:annotationsPerItem": "One target per item, produced by the deterministic reference implementation.",
+  "rai:annotatorDemographics": "Not applicable. No human annotators.",
+  "rai:dataAnnotationAnalysis": "Not applicable. Determinism of the reference implementations removes inter-annotator variance.",
+  "rai:dataAnnotationPlatform": "Not applicable.",
+  "rai:dataAnnotationProtocol": "Targets are produced programmatically by reference implementations of each task (translation to ISO-8601, arithmetic, event-planning composition). No human annotation is involved at any stage.",
+  "rai:dataBiases": [
+    "Language bias: month and weekday names are rendered in English.",
+    "Calendar bias: only the proleptic Gregorian calendar is represented.",
+    "Format bias: the renderer favours commonly observed Western datetime conventions; non-Western or domain-specific conventions are under-represented."
+  ],
+  "rai:dataCollection": "The benchmark is fully synthetic. Inputs are datetimes sampled uniformly across a wide year range and rendered into natural-language forms via a parameterised generator. Targets are computed deterministically from the inputs by reference implementations, ensuring exact ground truth without human labelling.",
+  "rai:dataCollectionMissingData": "Not applicable. The synthetic generation pipeline emits complete observations or rejects them at source; no observations contain missing fields.",
+  "rai:dataCollectionRawData": "No raw source data. All observations are produced by a deterministic generator from random seeds; the generator code is released alongside the dataset.",
+  "rai:dataCollectionTimeFrame": [
+    "2024-09-01",
+    "2026-05-04"
+  ],
+  "rai:dataCollectionType": "Software Collection",
+  "rai:dataManipulationProtocol": "Not applicable. Observations are emitted directly from the generator and are not subsequently transformed.",
+  "rai:dataImputationProtocol": "Not applicable.",
+  "rai:dataLimitations": [
+    "The benchmark uses English-language month and weekday names and Western calendar conventions; performance on this benchmark does not necessarily generalise to other locales or calendar systems.",
+    "Surface-form coverage is bounded by the renderer; idiosyncratic real-world datetime expressions may fall outside the distribution.",
+    "Targets are exact by construction, so the benchmark does not capture the inherent ambiguity present in some real-world datetime references."
+  ],
+  "rai:dataPreprocessingProtocol": [
+    "Sampling: uniform sampling over the configured year, month, day, and time-of-day ranges per task.",
+    "Rendering: each datetime is rendered into one of several natural-language surface forms (varying separators, month name casings, ordinal suffixes, and timezone presentations).",
+    "Validation: each generated observation is round-tripped through the reference implementation to verify ground-truth correctness before inclusion."
+  ],
+  "rai:dataReleaseMaintenancePlan": "Released under semantic versioning. The dataset, generator, and reference implementations are maintained at the public repository linked in the citation. Issues and corrections are tracked via the repository issue tracker; new releases follow patch / minor / major conventions.",
+  "rai:dataSocialImpact": "By providing a precise, reproducible measure of LLM temporal reasoning, the benchmark supports more rigorous evaluation of models used in scheduling, logging, financial reporting, and other temporally sensitive applications.",
+  "rai:dataUseCases": [
+    "Evaluation of large-language-model temporal-translation and -reasoning capability.",
+    "Diagnostic decomposition of model failure modes across surface form, arithmetic, and compositional sub-skills.",
+    "Targeted fine-tuning data for improving temporal competence in small models."
+  ],
+  "rai:machineAnnotationTools": "Python 3.12 datetime generator (released with the benchmark)",
+  "rai:personalSensitiveInformation": "None. The benchmark contains no personal data, no identifiable information, and no content derived from human subjects.",
+  "url": "https://github.com/LLM-DATETIME/Datasets",
+  "version": "1.0.0",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "github-repository",
+      "name": "github-repository",
+      "description": "Repository of PRIMETIME benchmarks and datasets on GitHub.",
+      "contentUrl": "https://github.com/LLM-DATETIME/Datasets",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "datetime_a3_jsonl",
+      "name": "PRIMETIME/Translate",
+      "description": "Translate the full datetime to ISO-8601 representation without timezone and without microseconds",
+      "containedIn": {
+        "@id": "github-repository"
+      },
+      "encodingFormat": "application/jsonlines",
+      "includes": "**/benchmark.jsonl"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "datetime_a3",
+      "name": "PRIMETIME/Translate",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "datetime_a3/input",
+          "name": "input",
+          "description": "A datetime in natural form, e.g 11th.february.5951 ,1:12:31.446879 +0100",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "datetime_a3_jsonl"
+            },
+            "extract": {
+              "column": "input"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "datetime_a3/target",
+          "name": "target",
+          "description": "The datetime in ISO-8601 format, without timezone and without microseconds",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "datetime_a3_jsonl"
+            },
+            "extract": {
+              "column": "target"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "rai:hasSyntheticData": true
+}
