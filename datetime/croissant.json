@@ -44,7 +44,8 @@
     "separator": "cr:separator",
     "source": "cr:source",
     "subField": "cr:subField",
-    "transform": "cr:transform"
+    "transform": "cr:transform",
+    "prov": "http://www.w3.org/ns/prov#"
   },
   "@type": "sc:Dataset",
   "name": "The PRIMETIME benchmark.",
@@ -61,11 +62,7 @@
   "rai:dataAnnotationAnalysis": "Not applicable. Determinism of the reference implementations removes inter-annotator variance.",
   "rai:dataAnnotationPlatform": "Not applicable.",
   "rai:dataAnnotationProtocol": "Targets are produced programmatically by reference implementations of each task (translation to ISO-8601, arithmetic, event-planning composition). No human annotation is involved at any stage.",
-  "rai:dataBiases": [
-    "Language bias: month and weekday names are rendered in English.",
-    "Calendar bias: only the proleptic Gregorian calendar is represented.",
-    "Format bias: the renderer favours commonly observed Western datetime conventions; non-Western or domain-specific conventions are under-represented."
-  ],
+  "rai:dataBiases": "[\"Language bias: month and weekday names are rendered in English.\", \"Calendar bias: only the proleptic Gregorian calendar is represented.\", \"Format bias: the renderer favours commonly observed Western datetime conventions; non-Western or domain-specific conventions are under-represented.\"]",
   "rai:dataCollection": "The benchmark is fully synthetic. Inputs are datetimes sampled uniformly across a wide year range and rendered into natural-language forms via a parameterised generator. Targets are computed deterministically from the inputs by reference implementations, ensuring exact ground truth without human labelling.",
   "rai:dataCollectionMissingData": "Not applicable. The synthetic generation pipeline emits complete observations or rejects them at source; no observations contain missing fields.",
   "rai:dataCollectionRawData": "No raw source data. All observations are produced by a deterministic generator from random seeds; the generator code is released alongside the dataset.",
@@ -76,11 +73,7 @@
   "rai:dataCollectionType": "Software Collection",
   "rai:dataManipulationProtocol": "Not applicable. Observations are emitted directly from the generator and are not subsequently transformed.",
   "rai:dataImputationProtocol": "Not applicable.",
-  "rai:dataLimitations": [
-    "The benchmark uses English-language month and weekday names and Western calendar conventions; performance on this benchmark does not necessarily generalise to other locales or calendar systems.",
-    "Surface-form coverage is bounded by the renderer; idiosyncratic real-world datetime expressions may fall outside the distribution.",
-    "Targets are exact by construction, so the benchmark does not capture the inherent ambiguity present in some real-world datetime references."
-  ],
+  "rai:dataLimitations": "[\"The benchmark uses English-language month and weekday names and Western calendar conventions; performance on this benchmark does not necessarily generalise to other locales or calendar systems.\", \"Surface-form coverage is bounded by the renderer; idiosyncratic real-world datetime expressions may fall outside the distribution.\", \"Targets are exact by construction, so the benchmark does not capture the inherent ambiguity present in some real-world datetime references.\"]",
   "rai:dataPreprocessingProtocol": [
     "Sampling: uniform sampling over the configured year, month, day, and time-of-day ranges per task.",
     "Rendering: each datetime is rendered into one of several natural-language surface forms (varying separators, month name casings, ordinal suffixes, and timezone presentations).",
@@ -88,11 +81,7 @@
   ],
   "rai:dataReleaseMaintenancePlan": "Released under semantic versioning. The dataset, generator, and reference implementations are maintained at the public repository linked in the citation. Issues and corrections are tracked via the repository issue tracker; new releases follow patch / minor / major conventions.",
   "rai:dataSocialImpact": "By providing a precise, reproducible measure of LLM temporal reasoning, the benchmark supports more rigorous evaluation of models used in scheduling, logging, financial reporting, and other temporally sensitive applications.",
-  "rai:dataUseCases": [
-    "Evaluation of large-language-model temporal-translation and -reasoning capability.",
-    "Diagnostic decomposition of model failure modes across surface form, arithmetic, and compositional sub-skills.",
-    "Targeted fine-tuning data for improving temporal competence in small models."
-  ],
+  "rai:dataUseCases": "[\"Evaluation of large-language-model temporal-translation and -reasoning capability.\", \"Diagnostic decomposition of model failure modes across surface form, arithmetic, and compositional sub-skills.\", \"Targeted fine-tuning data for improving temporal competence in small models.\"]",
   "rai:machineAnnotationTools": "Python 3.12 datetime generator (released with the benchmark)",
   "rai:personalSensitiveInformation": "None. The benchmark contains no personal data, no identifiable information, and no content derived from human subjects.",
   "url": "https://github.com/LLM-DATETIME/Datasets",
@@ -299,5 +288,54 @@
       ]
     }
   ],
-  "rai:hasSyntheticData": true
+  "rai:hasSyntheticData": true,
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "https://github.com/LLM-DATETIME/Generator",
+      "prov:label": "PRIMETIME Datetime Generator",
+      "sc:license": "Apache 2.0"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q4929239"
+      },
+      "prov:label": "PRIMETIME Datetime Generator",
+      "sc:description": "Fully synthetic data generation. The generator is implemented in Python and leverages the Babel library to render datetime objects into arbitrary natural-language representations. Additionally, the num2words and roman libraries are used to render the numerals in alternative forms, for example 'twenty-five' or 'IV', respectively."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q109719325"
+      },
+      "prov:label": "PRIMETIME Datetime Generator",
+      "sc:description": "The fine-tuning datasets and benchmarks are synthetically generated, yielding deterministic input-to-target mappings."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q5227332"
+      },
+      "prov:label": "PRIMETIME Datetime Generator",
+      "sc:description": "N/A. The data is fully synthetic with no pre-processing stage."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q1172378"
+      },
+      "prov:label": "PRIMETIME Datetime Generator",
+      "sc:description": "Each rendered datetime appearing in an input sequence undergoes a final cleaning step before inclusion in the dataset. Unicode characters are normalised to ASCII via NFKD decomposition to ensure that all input characters map to well-represented tokens across common tokeniser vocabularies. Leading and trailing whitespace are stripped. A final post-generation verification discards any input in which a required component is missing (e.g. '01/\\!/ 2010 1PM'), as such inputs are impossible to solve. This occurs silently when Babel cannot resolve certain format variations, which may not be defined for a given locale, even en_US."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q3306762"
+      },
+      "prov:label": "PRIMETIME Datetime Generator",
+      "sc:description": "Several hundred samples were manually inspected to verify input well-formedness and target correctness."
+    }
+  ]
 }
